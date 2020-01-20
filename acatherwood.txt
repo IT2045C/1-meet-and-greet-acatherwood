@@ -1,51 +1,30 @@
-
-
 ****************************************************
-Anne Catherwood
+**              Anne Catherwood                   **
 ****************************************************
-
 
 email: schafeae@mail.uc.edu
 
-
 ** Personal Background:
 ------------------------
-
-
 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
-
-
 massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec
-
-
 quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-
-
 Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
-
-
 imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.
-
-
 Cras dapibu
-
 
 ** Programming Languages:
 ------------------------
 1. C#
 2. Java
-3. JavaScript
-4. Ruby
-5. SQL (no it is not a Programming Language. It is a database scripting language !)
-
+3. Ruby
+4. SQL (No it's not a programming language. It's a database scripting language! It also happens to be my absolute favorite language, so I am including it here)
 
 ** Achievements and Things I would like to share:
 ------------------------
-1. Associates Degree in Business Programming and Systems Analysis from Cincinnnati State
+1. Associates Degree from Cincinnati State
 2. Dean's List
-3. MicroTik Certified Network Associate
-4. MicroTik Certified Traffic Control Engineer
-5. Software Engineer at CoverMyMeds!
-
-
+3. MickroTik Certified Network Associate
+4. MicroTik Certified Traffice Control Engineer
+5. Software Engineer at CoverMyMeds
 ****************************************************

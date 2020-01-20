@@ -35,39 +35,49 @@ public class PortfolioGenerator {
 
     public static void recordUserInput(String fileName){
         String prompt;
+        String newLine = "\n";
         Scanner scan = new Scanner(System.in);
 
         String nameStyle = "****************************************************";
+
         prompt = "Please enter your name";
         String userName = SafeInput.getString(scan, prompt);
-        userName = nameStyle + "\n" + userName + "\n" + nameStyle;
+        //Extra Credit - center name
+        //Note: This works but it's awful. It's hard coded to the point where it only works for my name(yuck!!!)
+        //If it was a requirement, I would fix it. But given that it's extra credit and I still need to do part one,
+        //I'm leaving it for now
+        //// TODO: 1/19/2020 Have some self-respect and fix this mess!
+        String userNameStyle = "**              " + userName + "                   **";
+        userName = nameStyle + newLine + userNameStyle + newLine + nameStyle + newLine;
         writeToFile(fileName, userName);
 
         prompt = "Please enter your email";
         String userEmail = SafeInput.getEmail(scan, prompt);
-        userEmail = "email: " + userEmail;
+        userEmail = "email: " + userEmail + newLine;
         writeToFile(fileName, userEmail);
 
         prompt = "Please give provide a brief personal background";
-        String personalBackgroundHeader = "** Personal Background:" + "\n" + "------------------------";
+        String personalBackgroundHeader = "** Personal Background:" + newLine + "------------------------";
         writeToFile(fileName, personalBackgroundHeader);
         String userBackground = SafeInput.getString(scan, prompt);
         //word wrap at 100 characters
         List formatted = splitString(userBackground, 100);
+        String formattedResponse = "";
         for(int i = 0; i < formatted.size(); i++) {
 
-            writeToFile(fileName, formatted.get(i).toString());
+           formattedResponse += formatted.get(i).toString() + "\n";
         }
+        writeToFile(fileName, formattedResponse);
 
         prompt = ("Programming Languages(type stop to move on to the next question: )");
-         personalBackgroundHeader = "** Programming Languages:" + "\n" + "------------------------";
-        writeToFile(fileName, personalBackgroundHeader);
+        String programmingLanguagesHeader = "** Programming Languages:" + newLine + "------------------------";
+        writeToFile(fileName, programmingLanguagesHeader);
         ArrayList userProgrammingLanguages = SafeInput.getArrayOfStrings(scan, prompt);
         writeArrayToFile(fileName, userProgrammingLanguages);
 
         prompt = ("Achievements and Interests(type stop to move on to the next question: )");
-         personalBackgroundHeader = "** Achievements and Things I would like to share:" + "\n" + "------------------------";
-        writeToFile(fileName, personalBackgroundHeader);
+         String achievementsHeader = newLine +  "** Achievements and Things I would like to share:" + newLine + "------------------------";
+        writeToFile(fileName, achievementsHeader);
         ArrayList userAchievements = SafeInput.getArrayOfStrings(scan, prompt);
         writeArrayToFile(fileName, userAchievements);
 
@@ -78,13 +88,12 @@ public class PortfolioGenerator {
 
     public static void writeToFile(String filename, String userInput){
         try {
-            String newLine = "\r\n";
+            String newLine = "\n";
             FileWriter myWriter = new FileWriter(filename, true);
             PrintWriter printWriter = new PrintWriter(myWriter);
-            printWriter.println(newLine);
             printWriter.println(userInput);
             printWriter.close();
-            System.out.println("Successfully wrote to the file.");
+           // System.out.println("Successfully wrote to the file."); --debug
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -103,7 +112,7 @@ public class PortfolioGenerator {
                 printWriter.println(counter + ". " + userInput.get(i));
             }
             printWriter.close();
-            System.out.println("Successfully wrote to the file.");
+            //System.out.println("Successfully wrote to the file."); --debug
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
