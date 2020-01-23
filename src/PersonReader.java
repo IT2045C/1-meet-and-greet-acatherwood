@@ -10,17 +10,6 @@ import java.util.Scanner;
 
 public class PersonReader {
     public static void main(String[] args) throws Exception {
-//        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-//
-//        int returnValue = jfc.showOpenDialog(null);
-//        // int returnValue = jfc.showSaveDialog(null);
-//
-//        if (returnValue == JFileChooser.APPROVE_OPTION) {
-//            File selectedFile = jfc.getSelectedFile();
-//            jfc.showOpenDialog(selectedFile);
-//            System.out.println(selectedFile.getAbsolutePath());
-//            System.out.println(selectedFile.toString());
-//        }
 
         //// TODO: 1/19/2020 Validate! Make sure if the file cant be found it doesn't explode
         JFileChooser chooser = new JFileChooser();
@@ -32,6 +21,8 @@ public class PersonReader {
             String headers = scan.nextLine();
             headers = headers.replace("_", "");
             String[] values = headers.split(",");
+            var formattedValue = String.format("%-10s %-10s %-10s %-10s\n", values[0], values[1], values[2], values[3]);
+            System.out.printf(formattedValue);
             String capitalizeWord="";
 
             for (String value: values) {
@@ -40,29 +31,34 @@ public class PersonReader {
                 capitalizeWord += first.toUpperCase()+afterFirst+" ";
 
             }
-     //       System.out.println(capitalizeWord);
-            String[] columns = capitalizeWord.split(" ");
-            String x = "";
-            String y = "";
-            for (String column: columns){
-              x =  String.format("%10s", column);
-              y += x;
-            }
-            System.out.println(y.trim());
-            String divider = "====================================================";
+                  System.out.println(capitalizeWord);
+//            String[] columns = capitalizeWord.split(" ");
+//            String columnHeader = "";
+//            String columnHeaders = "";
+//            for (String column: columns){
+//                columnHeader =  String.format("%15s", column);
+//                columnHeaders += columnHeader;
+//            }
+//            System.out.println(columnHeaders.trim());
+            String divider = "==================================================================";
             System.out.println(divider);
-          //  System.out.format( "%-15s %15s %15s %15s %n", columns[0], columns[1], columns[2], columns[3]);
+            //System.out.format( "%-15s %15s %15s %15s %n", columns[0], columns[1], columns[2], columns[3]);
 
-            String people = scan.nextLine();
+                do{
+                    String people = scan.nextLine();
+                    //System.out.println(people);
+                    int index = 0;
+                    String[] persons = people.split(",");
+                    var formattedPeople = String.format("%-10s %-10s %-10s %-10s\n", persons[0], persons[1], persons[2], persons[3]);
+                    System.out.printf(formattedPeople);
 
-            String[] persons = people.split(",");
-            for (String person: persons) {
-                String.format(person);
-            }
+
+
+                }while (scan.hasNextLine() == true);
+
+            //System.out.format( "%5s %10s %10s %10s %n", persons[0], persons[1], persons[2], persons[3]);
             //System.out.format( "%-15s %15s %25s %15s %n", persons[0], persons[1], persons[2], persons[3]);
             //System.out.println(headers);
-
-
         }
     }
 }
