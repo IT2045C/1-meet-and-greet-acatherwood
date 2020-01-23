@@ -18,47 +18,35 @@ public class PersonReader {
             File f = chooser.getSelectedFile();
             Scanner scan = new Scanner(new FileReader(f));
             //format headers
+            //get first line
             String headers = scan.nextLine();
+            //remove underscore in column header
             headers = headers.replace("_", "");
+            //remove comma between words
             String[] values = headers.split(",");
-            var formattedValue = String.format("%-10s %-10s %-10s %-10s\n", values[0], values[1], values[2], values[3]);
-            System.out.printf(formattedValue);
+            //Uppercase first letter of each header
             String capitalizeWord="";
-
             for (String value: values) {
                 String first =value.substring(0,1);
                 String afterFirst =value.substring(1);
                 capitalizeWord += first.toUpperCase()+afterFirst+" ";
-
             }
-                  System.out.println(capitalizeWord);
-//            String[] columns = capitalizeWord.split(" ");
-//            String columnHeader = "";
-//            String columnHeaders = "";
-//            for (String column: columns){
-//                columnHeader =  String.format("%15s", column);
-//                columnHeaders += columnHeader;
-//            }
-//            System.out.println(columnHeaders.trim());
-            String divider = "==================================================================";
+
+            //create a new array of formatted headers to further format
+            String[] columnHeaders = capitalizeWord.split(" ");
+            var formattedValue = String.format("%-10s %-10s %-10s %-10s\n", columnHeaders[0], columnHeaders[1], columnHeaders[2], columnHeaders[3]);
+            System.out.print(formattedValue);
+            String divider = "===========================================================";
             System.out.println(divider);
-            //System.out.format( "%-15s %15s %15s %15s %n", columns[0], columns[1], columns[2], columns[3]);
-
-                do{
-                    String people = scan.nextLine();
-                    //System.out.println(people);
-                    int index = 0;
-                    String[] persons = people.split(",");
-                    var formattedPeople = String.format("%-10s %-10s %-10s %-10s\n", persons[0], persons[1], persons[2], persons[3]);
-                    System.out.printf(formattedPeople);
-
-
-
-                }while (scan.hasNextLine() == true);
-
-            //System.out.format( "%5s %10s %10s %10s %n", persons[0], persons[1], persons[2], persons[3]);
-            //System.out.format( "%-15s %15s %25s %15s %n", persons[0], persons[1], persons[2], persons[3]);
-            //System.out.println(headers);
+            //format list of people
+            do{
+                String people = scan.nextLine();
+                //System.out.println(people);
+                int index = 0;
+                String[] persons = people.split(",");
+                var formattedPeople = String.format("%-10s %-10s %-10s %-10s\n", persons[0], persons[1], persons[2], persons[3]);
+                System.out.print(formattedPeople);
+            }while (scan.hasNextLine() == true);
         }
     }
 }
