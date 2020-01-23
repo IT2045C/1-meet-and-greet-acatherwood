@@ -1,29 +1,39 @@
 import javax.swing.*;
-import javax.swing.filechooser.FileSystemView;
-import java.awt.*;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class PersonReader {
     public static void main(String[] args) throws Exception {
 
-        //// TODO: 1/19/2020 Validate! Make sure if the file cant be found it doesn't explode
         JFileChooser chooser = new JFileChooser();
         int fileName = chooser.showOpenDialog(null);
-        if(fileName == JFileChooser.APPROVE_OPTION){
-            File f = chooser.getSelectedFile();
-            Scanner scan = new Scanner(new FileReader(f));
-            //format headers
-            //get first line
-            String headers = scan.nextLine();
+        try{
+            if(fileName == JFileChooser.APPROVE_OPTION){
+                File f = chooser.getSelectedFile();
+                Scanner scan = new Scanner(new FileReader(f));
+                String headers = scan.nextLine();
+
+                String formattedHeaders = formatHeadings(headers);
+                System.out.print(formattedHeaders);
+                String divider = "===========================================================";
+                System.out.println(divider);
+
+                GetRows(scan);
+            }
+
+            }catch(FileNotFoundException e) {
+                var message = "File not found";
+                System.out.println(message);
+            }
+        }
+
+        public static String formatHeadings (String columnHeaders){
             //remove underscore in column header
-            headers = headers.replace("_", "");
+            columnHeaders = columnHeaders.replace("_", "");
             //remove comma between words
-            String[] values = headers.split(",");
+            String[] values = columnHeaders.split(",");
             //Uppercase first letter of each header
             String capitalizeWord="";
             for (String value: values) {
@@ -33,20 +43,25 @@ public class PersonReader {
             }
 
             //create a new array of formatted headers to further format
-            String[] columnHeaders = capitalizeWord.split(" ");
-            var formattedValue = String.format("%-10s %-10s %-10s %-10s\n", columnHeaders[0], columnHeaders[1], columnHeaders[2], columnHeaders[3]);
-            System.out.print(formattedValue);
-            String divider = "===========================================================";
-            System.out.println(divider);
-            //format list of people
-            do{
-                String people = scan.nextLine();
-                //System.out.println(people);
-                int index = 0;
-                String[] persons = people.split(",");
-                var formattedPeople = String.format("%-10s %-10s %-10s %-10s\n", persons[0], persons[1], persons[2], persons[3]);
-                System.out.print(formattedPeople);
-            }while (scan.hasNextLine() == true);
+            String[] formattedValue = capitalizeWord.split(" ");
+            String formattedHeaders = String.format("%-10s %-10s %-10s %-10s\n", formattedValue[0], formattedValue[1], formattedValue[2], formattedValue[3]);
+
+            return formattedHeaders;
+        }
+
+        public static void GetRows(Scanner scan) {
+            try {
+                //format list of people
+                do {
+                    String people = scan.nextLine();
+                    String[] persons = people.split(",");
+                    var formattedPeople = String.format("%-10s %-10s %-10s %-10s\n", persons[0], persons[1], persons[2], persons[3]);
+                    System.out.print(formattedPeople);
+                } while (scan.hasNextLine() == true);
+            } catch (Exception e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
         }
     }
-}
+
