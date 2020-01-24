@@ -21,10 +21,11 @@ public class PortfolioGenerator {
     public static void creatFile(String filename){
         try {
             File myObj = new File(filename);
+            //debug purposes only
             if (myObj.createNewFile()) {
                 System.out.println("File created: " + myObj.getName());
             } else {
-                System.out.println("File already exists.");
+                System.out.println("File already exists - writing to existing file.");
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");
@@ -38,21 +39,14 @@ public class PortfolioGenerator {
         String newLine = "\n";
         Scanner scan = new Scanner(System.in);
 
-        String nameStyle = "****************************************************";
-
         prompt = "Please enter your name";
         String userName = SafeInput.getString(scan, prompt);
-        //Extra Credit - center name
-        //Note: This works but it's awful. It's hard coded to the point where it only works for my name(yuck!!!)
-        //If it was a requirement, I would fix it. But given that it's extra credit and I still need to do part one,
-        //I'm leaving it for now
-        //// TODO: 1/19/2020 Have some self-respect and fix this mess!
-        String userNameStyle = "**              " + userName + "                   **";
-        userName = nameStyle + newLine + userNameStyle + newLine + nameStyle + newLine;
-        writeToFile(fileName, userName);
+        userName = uppercaseFirstLetter(userName);
+        writeToFileFormattedName(fileName, userName);
 
         prompt = "Please enter your email";
         String userEmail = SafeInput.getEmail(scan, prompt);
+        userEmail = uppercaseFirstLetter(userEmail);
         userEmail = "email: " + userEmail + newLine;
         writeToFile(fileName, userEmail);
 
@@ -64,7 +58,6 @@ public class PortfolioGenerator {
         List formatted = splitString(userBackground, 100);
         String formattedResponse = "";
         for(int i = 0; i < formatted.size(); i++) {
-
            formattedResponse += formatted.get(i).toString() + "\n";
         }
         writeToFile(fileName, formattedResponse);
@@ -76,15 +69,32 @@ public class PortfolioGenerator {
         writeArrayToFile(fileName, userProgrammingLanguages);
 
         prompt = ("Achievements and Interests(type stop to move on to the next question: )");
-         String achievementsHeader = newLine +  "** Achievements and Things I would like to share:" + newLine + "------------------------";
+        String achievementsHeader = newLine +  "** Achievements and Things I would like to share:" + newLine + "------------------------";
         writeToFile(fileName, achievementsHeader);
         ArrayList userAchievements = SafeInput.getArrayOfStrings(scan, prompt);
         writeArrayToFile(fileName, userAchievements);
 
         //add closing stars
-        writeToFile(fileName, nameStyle);
+        String footer = newLine + "****************************************************" ;
+        writeToFile(fileName, footer);
     }
 
+    public static void writeToFileFormattedName(String filename, String userInput){
+        try {
+            String newLine = "\n";
+            String special = "**";
+            String headerStars = "****************************************************";
+            FileWriter myWriter = new FileWriter(filename, true);
+            PrintWriter printWriter = new PrintWriter(myWriter);
+            printWriter.println(headerStars);
+            printWriter.printf( "%-15s %15s %20s %n", special, userInput, special);
+            printWriter.println(headerStars);
+            printWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
 
     public static void writeToFile(String filename, String userInput){
         try {
@@ -93,7 +103,6 @@ public class PortfolioGenerator {
             PrintWriter printWriter = new PrintWriter(myWriter);
             printWriter.println(userInput);
             printWriter.close();
-           // System.out.println("Successfully wrote to the file."); --debug
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -112,13 +121,12 @@ public class PortfolioGenerator {
                 printWriter.println(counter + ". " + userInput.get(i));
             }
             printWriter.close();
-            //System.out.println("Successfully wrote to the file."); --debug
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
-    // c/p from StackOverflow. No need to reinvent the wheel
+
     public static List splitString(String msg, int lineSize) {
         List res = new ArrayList();
 
@@ -129,6 +137,12 @@ public class PortfolioGenerator {
             res.add(m.group().trim());
         }
         return res;
+    }
+
+    public static String uppercaseFirstLetter(String msg){
+        String formatted = msg.substring(0,1).toUpperCase() + msg.substring(1);
+
+        return formatted;
     }
 
 }

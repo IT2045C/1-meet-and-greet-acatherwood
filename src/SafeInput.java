@@ -116,7 +116,6 @@ public class SafeInput {
         do{
             String userInput = console.nextLine();
              retval = userInput.trim();
-            //// TODO: 1/14/2020 if prompt is for name
             if (prompt.contains("name"))
             {
                 if (retval.matches(nameRegex)) {
@@ -126,7 +125,6 @@ public class SafeInput {
                     System.out.println("provide first and last name");
                 }
             }
-            // TODO: 1/14/2020 else if prompt is for personal background: make sure this works!
             else if (prompt.contains("personal background"))
             {
                 //make sure personal background statement isn't blank or null.
@@ -145,8 +143,6 @@ public class SafeInput {
 
     public static ArrayList<String> getArrayOfStrings(Scanner console, String prompt) {
         ArrayList<String> retval = new ArrayList<>();
-        // add Implementation here ⬇
-        // TODO: 1/14/2020 programming languages validation
         Boolean done = false;
 
         System.out.println(prompt);
@@ -155,7 +151,7 @@ public class SafeInput {
             if (userInput.isEmpty()){
                 System.out.println("Please add a programming language, blank lines are not accepted");
             }
-            else if (userInput.equals("stop") || userInput.equals("STOP") ){
+            else if (userInput.equalsIgnoreCase("stop")){
                 done = true;
             }else{
                 retval.add(userInput.trim());
