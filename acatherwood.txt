@@ -1,0 +1,30 @@
+****************************************************
+**              Anne Catherwood                   ** 
+****************************************************
+email: Schafeae@mail.uc.edu
+
+** Personal Background:
+------------------------
+I am majoring in Information Technology with a software development track. My expected graduation
+date is May 2021. I graduated from Cincinnati State in May 2018 and tranferred to UC in August 2018.
+I work as a Software Developer at CoverMyMeds in Columbus Ohio. I am a single mom to an
+adorable four year old little girl who is the light of my life.
+
+** Programming Languages:
+------------------------
+1. C#
+2. Java
+3. Javascript
+4. Ruby
+5. SQL(depends on who you ask, technically it is a database scripting language with the functionality of a robust programming my language)
+
+** Achievements and Things I would like to share:
+------------------------
+1. Dean's List
+2. MicroTik Certified Network Associate
+3. MicroTik Certified Traffic Control Engineer
+4. Mom to an awesome tiny human
+5. Software Developer at CoverMyMeds
+
+****************************************************
+

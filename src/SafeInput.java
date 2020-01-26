@@ -75,17 +75,88 @@ public class SafeInput {
         return retVal;
     }
 
+    //extra credit
+    public static String getEmail(Scanner console, String prompt) {
+        String retval = "";
+        String trash = "";
+        boolean done = false;
+
+        String emailRegex = "([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})";
+        System.out.println(prompt);
+
+
+        do{
+            String userInput = console.nextLine();
+            retval = userInput.trim();
+
+                if (retval.matches(emailRegex)) {
+                    done = true;
+
+                }else {
+                    System.out.println("provide valid email address");
+                }
+
+        }while (!done);
+
+        return retval;
+
+    }
+
+
+
     public static String getString(Scanner console, String prompt) {
         String retval = "";
-        // add Implementation here ⬇
+        boolean done = false;
+
+        //make sure the user enters a first and last name
+        String nameRegex = "(\\w.+\\s).+";
+        System.out.println(prompt);
+
+
+        do{
+            String userInput = console.nextLine();
+             retval = userInput.trim();
+            if (prompt.contains("name"))
+            {
+                if (retval.matches(nameRegex)) {
+                    done = true;
+
+                }else {
+                    System.out.println("provide first and last name");
+                }
+            }
+            else if (prompt.contains("personal background"))
+            {
+                //make sure personal background statement isn't blank or null.
+                if (!(retval.isEmpty()) || (retval == null)){
+                    done = true;
+                }
+                else{
+                    System.out.println("you must provide a personal background");
+                }
+            }
+
+        }while (!done);
 
         return retval;
     }
 
     public static ArrayList<String> getArrayOfStrings(Scanner console, String prompt) {
         ArrayList<String> retval = new ArrayList<>();
-        // add Implementation here ⬇
+        Boolean done = false;
 
+        System.out.println(prompt);
+        do {
+            String userInput = console.nextLine();
+            if (userInput.isEmpty()){
+                System.out.println("Please add a programming language, blank lines are not accepted");
+            }
+            else if (userInput.equalsIgnoreCase("stop")){
+                done = true;
+            }else{
+                retval.add(userInput.trim());
+            }
+        }while (!done);
         return retval;
     }
 
